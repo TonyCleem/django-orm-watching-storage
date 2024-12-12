@@ -2,51 +2,35 @@ from datacenter.models import Passcard
 from datacenter.models import Visit
 from django.shortcuts import render
 
+from visit_timer import get_duration
+from visit_timer import format_duration
+
 
 def storage_information_view(request):
 
-
-    #шаг 10
-    current_time =  localtime().replace(microsecond=0)
-    visits = Visit.objects.filter(leaved_at__isnull=True)
-
-    for visit in visits:
-        print(f'{employee.passcard} - Зашёл в хранилище, время по Москве:')
-        print(visit.entered_at)
-        print()
-        stay_time = current_time - visit.entered_at
-        print("Находится в хранилище:")
-        print(stay_time)
-
-    #шаг 11
-    employees_from_storage = Visit.objects.filter(leaved_at__isnull=True)
-    for employee in employees_from_storage:
-        employee_name = employee.passcard.owner_name
-        print(employee_name)
-
-
-
-
     # Шаг 12
-    current_time =  localtime().replace(microsecond=0)
-    
-    employees_from_storage = Visit.objects.filter(leaved_at__isnull=True)
+    visits = Visit.objects.filter(leaved_at__isnull=True)
+    for visit in visits:
+        employee_name = str(visit.passcard.owner_name)
+        entered_at = visit.entered_at
+        duration = get_duration(visit)
+        duration = format_duration(duration)
 
-    for employee in employees_from_storage:
-        employee_name = employee.passcard.owner_name
-        print(employee_name)
+        months = {
+                1: "января", 2: "февраля", 3: "марта", 4: "апреля", 5: "мая", 6: "июня",
+                7: "июля", 8: "августа", 9: "сентября", 10: "октября", 11: "ноября", 12: "декабря"
+            }
 
-
-
-
-    non_closed_visits = [
-        {
-            'who_entered': 'Richard Shaw',
-            'entered_at': '11-04-2018 25:34',
-            'duration': '25:03',
-        }
-    ]
+        entered_at = f"{entered_at.day} {months[entered_at.month]} {entered_at.year} г. {entered_at.strftime('%H:%M')}"
+        
+        non_closed_visits = [
+            {
+                'who_entered': employee_name,
+                'entered_at': entered_at,
+                'duration': duration
+            }
+        ]
     context = {
-        'non_closed_visits': non_closed_visits,  # не закрытые посещения
+        'non_closed_visits': non_closed_visits,
     }
     return render(request, 'storage_information.html', context)
