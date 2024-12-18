@@ -28,3 +28,8 @@ class Visit(models.Model):
                 if self.leaved_at else 'not leaved'
             )
         )
+
+
+def is_visit_long(visit, minutes=60):
+    if visit > minutes:
+        return True

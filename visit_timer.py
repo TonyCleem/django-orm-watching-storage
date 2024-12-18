@@ -2,7 +2,6 @@ from django.utils.timezone import localtime
 
 
 def get_duration(visit):
-
     current_time =  localtime().replace(microsecond=0)
     duration = current_time - visit.entered_at
     return duration
