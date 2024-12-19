@@ -1,13 +1,11 @@
 from datacenter.models import Passcard
 from datacenter.models import Visit
 from django.shortcuts import render
-from visit_timer import get_duration
-from visit_timer import format_duration
+from timer import get_duration
+from timer import format_duration
 
 
 def storage_information_view(request):
-
-    # Шаг 12
     visits = Visit.objects.filter(leaved_at__isnull=True)
     for visit in visits:
         employee_name = str(visit.passcard.owner_name)
