@@ -30,6 +30,8 @@ class Visit(models.Model):
         )
 
 
-def is_visit_long(visit, minutes=60):
-    if visit > minutes:
+def is_visit_long(duration_visit, minutes=60):
+    duration_visit = int((duration_visit.total_seconds()) // 60)
+    if duration_visit > minutes:
         return True
+    return False

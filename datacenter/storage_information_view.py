@@ -1,8 +1,8 @@
-from datacenter.models import Passcard
 from datacenter.models import Visit
 from django.shortcuts import render
-from timer import get_duration
-from timer import format_duration
+from datacenter.visit_duration import get_duration
+from datacenter.visit_duration import format_duration
+from datacenter.formtter_entered_at import format_entered_at
 
 
 def storage_information_view(request):
@@ -12,14 +12,7 @@ def storage_information_view(request):
         entered_at = visit.entered_at
         duration = get_duration(visit)
         duration = format_duration(duration)
-
-        months = {
-                1: "января", 2: "февраля", 3: "марта", 4: "апреля", 5: "мая", 6: "июня",
-                7: "июля", 8: "августа", 9: "сентября", 10: "октября", 11: "ноября", 12: "декабря"
-            }
-
-        entered_at = f"{entered_at.day} {months[entered_at.month]} {entered_at.year} г. {entered_at.strftime('%H:%M')}"
-        
+        entered_at = format_entered_at(entered_at)
         non_closed_visits = [
             {
                 'who_entered': employee_name,
