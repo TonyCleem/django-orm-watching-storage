@@ -1,4 +1,9 @@
+import locale
+from datetime import datetime
 from django.utils.timezone import localtime
+
+
+locale.setlocale(locale.LC_ALL, "")
 
 
 SECONDS_IN_HOUR = 3600
@@ -19,3 +24,15 @@ def format_duration(duration):
     minutes = int((duration.total_seconds() % SECONDS_IN_HOUR) // SECONDS_IN_MINUTE)
     duration =  f'{hours}ч {minutes}мин'
     return duration
+
+
+def is_visit_long(duration_visit, minutes=60):
+    duration_visit = int(duration_visit.total_seconds() // SECONDS_IN_MINUTE)
+    return duration_visit > minutes
+
+
+def format_entered_at(entered_at):
+    entered_at = f"{entered_at.day} {entered_at.strftime('%B')} {entered_at.year} г. {entered_at.strftime('%H:%M')}"
+    return entered_at
+
+

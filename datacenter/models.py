@@ -1,6 +1,9 @@
 from django.db import models
 
 
+SECONDS_IN_MINUTE = 60
+
+
 class Passcard(models.Model):
     is_active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now=True)
@@ -28,10 +31,3 @@ class Visit(models.Model):
                 if self.leaved_at else 'not leaved'
             )
         )
-
-
-def is_visit_long(duration_visit, minutes=60):
-    duration_visit = int((duration_visit.total_seconds()) // 60)
-    if duration_visit > minutes:
-        return True
-    return False
