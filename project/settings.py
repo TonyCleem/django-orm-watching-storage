@@ -1,4 +1,5 @@
 import os
+
 from environs import Env
 
 
@@ -12,7 +13,7 @@ DATABASES = {
         'PORT': env.int("PORT"),
         'NAME': env('DB_NAME'),
         'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD')
+        'PASSWORD': env('DB_PASSWORD'),
     }
 }
 
