@@ -1,7 +1,14 @@
 # Пульт охраны банка #
 
-## Функционал
+Пульт охраны - веб-панель для управления и контроля доступа в хранилище.
+Общее использование недоступно. Ключ к базе не распространяется. Если понравился проект можете использовать исходники.
 
+---
+
+## Функционал
+- **storage_information_view.py** - просмотр хранилища
+- **passcard_info_view.py** - просмотр персональных пропусков
+- **active_passcards_view** - (_функция в разработке_)
 
 ## Требования
 Для запуска бота на вашем компьютере или сервере необходимо:
@@ -9,12 +16,12 @@
 * Python 3.7+
 * Установленные зависимости из `requirements.txt`
 ---
-## Установка
+## Установка и запуск
 1. Склонируйте репозиторий:
 
 ```bash
-git clone https://github.com/
-cd 
+git clone https://github.com/TonyCleem/django-orm-watching-storage
+cd django-orm-watching-storage
 ```
 2. Создайте виртуальное окружение:
 
@@ -26,10 +33,12 @@ source venv/bin/activate  # Для Windows: venv\Scripts\activate
 ```bash
 pip install -r requirements.txt
 ```
-4. Создайте файл .env в корне проекта:
-```text
-
+4. Запустите Django
 ```
+python manage.py runserver
+```
+После запуска перейдите по адресу `localhost:8000` для управления
+
 ---
 ### Цель проекта
 
