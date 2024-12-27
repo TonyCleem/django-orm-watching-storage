@@ -33,11 +33,24 @@ source venv/bin/activate  # Для Windows: venv\Scripts\activate
 ```bash
 pip install -r requirements.txt
 ```
-4. Запустите Django
+4. В корне репозитория создайте файл `.env` для хранения чувствительных данных
+
+Пример файла:
+```
+DB_SECRET_KEY=<ваш ключ>
+DB_HOST=<ваш хост(сайт)>
+DB_NAME=<ваша бд>
+DB_USER=<логин>
+DB_PASSWORD=<пароль>
+ALLOWED_HOSTS=[<список разрешенных хостов>]
+DEBUG=<true или false>
+PORT=<укажите порт>
+```
+5. Запустите Django
 ```
 python manage.py runserver
 ```
-После запуска перейдите по адресу `localhost:8000` для управления
+После запуска перейдите по адресу хоста, который Вы используете для управления
 
 ---
 ### Цель проекта
